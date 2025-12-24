@@ -6,7 +6,7 @@ export const restaurantConfig = {
   name: "La Garda am Freibad",
   tagline: "Italienischer Genuss in Ahlen",
   description:
-    "Erleben Sie authentische italienische Küche mit frischen Zutaten und mediterraner Leidenschaft – direkt am Freibad Ahlen.",
+    "La Garda steht für ehrliche italienische Küche, zubereitet mit hochwertigen Zutaten und viel Liebe zum Detail. Von knuspriger Pizza aus dem Steinofen bis zu feiner Pasta und klassischen Spezialitäten – bei uns geht es um echten Geschmack, nicht um Kompromisse. Ob im Restaurant oder bequem nach Hause geliefert: La Garda bringt ein Stück Italien auf Ihren Teller.",
 
   // Hero Section Images (crossfade slider)
   heroImages: [
@@ -27,13 +27,9 @@ export const restaurantConfig = {
   menuDinnerPdfUrl: "https://lagarda-ahlen.de/menu/flyer_pizzataxi.pdf",
 
   // Contact & Location
-  address: "Am Freibad 1, 59229 Ahlen",
-  phone: "+49 2382 123456",
-  hours: [
-    { days: "Di – Fr", time: "11:30 – 14:30, 17:30 – 22:00" },
-    { days: "Sa – So", time: "12:00 – 22:00" },
-    { days: "Montag", time: "Ruhetag" },
-  ],
+  address: "Bürgermeister-Corneli-Ring 48, 59227 Ahlen",
+  phone: "+49 2382 855 355",
+  hours: [{ days: "Do – So", time: "17:00 – 21:30 Uhr" }],
 
   // Google Maps
   googleMapsUrl: "https://maps.app.goo.gl/Fa5bDvSFu4jPfn1D6",
