@@ -32,7 +32,7 @@ const HeroSection = () => {
       const timeout = setTimeout(() => {
         setDisplayIndex(currentImageIndex);
         setIsTransitioning(false);
-      }, 1500);
+      }, restaurantConfig.crossfadeDuration);
       return () => clearTimeout(timeout);
     }
   }, [currentImageIndex, isTransitioning]);
@@ -57,11 +57,12 @@ const HeroSection = () => {
 
       {/* Transition Layer - fades in new image */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-out"
+        className="absolute inset-0 bg-cover bg-center ease-out"
         style={{
           backgroundImage: `url(${restaurantConfig.heroImages[currentImageIndex]})`,
           zIndex: 2,
           opacity: isTransitioning ? 1 : 0,
+          transition: `opacity ${restaurantConfig.crossfadeDuration}ms ease-out`,
         }}
         aria-hidden="true"
       />
