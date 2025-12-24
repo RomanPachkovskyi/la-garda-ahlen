@@ -1,3 +1,19 @@
+# La Garda am Freibad - robots.txt
+
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://lagarda-ahlen.de/sitemap.xml
+
+# Block access to admin/private areas (if any)
+Disallow: /api/
+Disallow: /admin/
+
+# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
@@ -8,7 +24,4 @@ User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
 Allow: /
