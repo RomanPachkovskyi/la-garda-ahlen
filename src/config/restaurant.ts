@@ -14,8 +14,8 @@ export const restaurantConfig = {
     "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80",
   ],
   
-  // Info Section Image
-  infoImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
+  // Info Section Image (full-screen background)
+  infoImage: "/images/info-bg.jpg",
   
   // Menu PDFs
   menuLunchPdfUrl: "/menu-mittag.pdf",

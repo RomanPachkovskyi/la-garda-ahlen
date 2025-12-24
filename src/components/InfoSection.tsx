@@ -4,20 +4,38 @@ import { restaurantConfig } from "@/config/restaurant";
 
 const InfoSection = () => {
   return (
-    <section 
-      id="info-section" 
-      className="min-h-screen bg-background py-20 md:py-32"
-    >
-      <div className="container mx-auto px-6 md:px-12 lg:px-16">
-        {/* Split Layout */}
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
-          {/* Left Column - Text Content */}
-          <div className="flex flex-col justify-center">
-            <h1 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+    <>
+      {/* Full-screen Info Section */}
+      <section 
+        id="info-section" 
+        className="relative flex min-h-screen items-center"
+      >
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url('${restaurantConfig.infoImage}')` }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
+        
+        {/* Content */}
+        <div className="container relative z-10 mx-auto px-6 py-20 md:px-12 lg:px-16">
+          <div className="max-w-xl">
+            {/* Tagline */}
+            <h1 className="font-serif text-4xl font-medium uppercase leading-tight tracking-wide text-foreground md:text-5xl lg:text-6xl">
               {restaurantConfig.tagline}
             </h1>
             
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground md:text-xl">
+            {/* Italian Tricolor Bar */}
+            <div className="my-8 flex h-1 w-32">
+              <div className="flex-1 bg-italian-green" />
+              <div className="flex-1 bg-italian-white" />
+              <div className="flex-1 bg-italian-red" />
+            </div>
+            
+            {/* Description */}
+            <p className="max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
               {restaurantConfig.description}
             </p>
 
@@ -27,7 +45,7 @@ const InfoSection = () => {
                 asChild
                 variant="outline"
                 size="lg"
-                className="group border-foreground/20 bg-transparent text-foreground hover:bg-foreground hover:text-primary-foreground"
+                className="group border-foreground/30 bg-transparent text-foreground hover:bg-foreground hover:text-primary-foreground"
               >
                 <a 
                   href={restaurantConfig.menuLunchPdfUrl} 
@@ -43,7 +61,7 @@ const InfoSection = () => {
                 asChild
                 variant="outline"
                 size="lg"
-                className="group border-foreground/20 bg-transparent text-foreground hover:bg-foreground hover:text-primary-foreground"
+                className="group border-foreground/30 bg-transparent text-foreground hover:bg-foreground hover:text-primary-foreground"
               >
                 <a 
                   href={restaurantConfig.menuDinnerPdfUrl} 
@@ -56,26 +74,12 @@ const InfoSection = () => {
               </Button>
             </div>
           </div>
-
-          {/* Right Column - Image */}
-          <div className="relative overflow-hidden rounded-sm">
-            <img
-              src={restaurantConfig.infoImage}
-              alt="Restaurant Ambiente"
-              className="h-full min-h-[400px] w-full object-cover lg:min-h-[500px]"
-              loading="lazy"
-            />
-            {/* Subtle Italian tricolor accent */}
-            <div className="absolute bottom-0 left-0 right-0 flex h-1">
-              <div className="flex-1 bg-italian-green" />
-              <div className="flex-1 bg-italian-white" />
-              <div className="flex-1 bg-italian-red" />
-            </div>
-          </div>
         </div>
+      </section>
 
-        {/* Bottom Info Area */}
-        <div className="mt-20 border-t border-border/30 pt-16 md:mt-28 md:pt-20">
+      {/* Contact Info Section */}
+      <section className="bg-background py-20 md:py-28">
+        <div className="container mx-auto px-6 md:px-12 lg:px-16">
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             {/* Address */}
             <div className="flex items-start gap-4">
@@ -154,8 +158,8 @@ const InfoSection = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

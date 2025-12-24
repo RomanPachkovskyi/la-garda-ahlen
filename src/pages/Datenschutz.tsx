@@ -76,7 +76,20 @@ const Datenschutz = () => {
 
           <section>
             <h2 className="mb-4 font-serif text-xl text-foreground">
-              5. Externe Dienste
+              5. Cookies
+            </h2>
+            <p className="leading-relaxed">
+              Diese Website verwendet technisch notwendige Cookies, um die Grundfunktionen 
+              der Website zu gewährleisten. Diese Cookies werden nur gesetzt, wenn Sie 
+              dem Cookie-Banner zustimmen. Die Cookies speichern keine personenbezogenen 
+              Daten und dienen lediglich dazu, Ihre Präferenzen (z.B. Cookie-Zustimmung) 
+              zu speichern.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-4 font-serif text-xl text-foreground">
+              6. Externe Dienste
             </h2>
             <h3 className="mb-2 font-medium text-foreground/80">Google Maps</h3>
             <p className="leading-relaxed">
