@@ -4,12 +4,16 @@ import { Button } from "@/components/ui/button";
 import { restaurantConfig } from "@/config/restaurant";
 const InfoSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [prevImageIndex, setPrevImageIndex] = useState<number | null>(null);
+
   useEffect(() => {
+    // Crossfade image slider with proper layering
     const interval = setInterval(() => {
+      setPrevImageIndex(currentImageIndex);
       setCurrentImageIndex((prev) => (prev + 1) % restaurantConfig.infoImages.length);
     }, restaurantConfig.heroSlideInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentImageIndex]);
   return (
     <>
       {/* Full-screen Info Section with Slideshow */}
@@ -21,7 +25,8 @@ const InfoSection = () => {
             className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
             style={{
               backgroundImage: `url('${image}')`,
-              opacity: index === currentImageIndex ? 1 : 0,
+              opacity: index === currentImageIndex || index === prevImageIndex ? 1 : 0,
+              zIndex: index === currentImageIndex ? 2 : index === prevImageIndex ? 1 : 0,
               transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
             }}
             aria-hidden="true"

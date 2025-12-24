@@ -4,6 +4,7 @@ import { restaurantConfig } from "@/config/restaurant";
 
 const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [prevImageIndex, setPrevImageIndex] = useState<number | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -13,15 +14,16 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    // Crossfade image slider
+    // Crossfade image slider with proper layering
     const interval = setInterval(() => {
+      setPrevImageIndex(currentImageIndex);
       setCurrentImageIndex((prev) => 
         (prev + 1) % restaurantConfig.heroImages.length
       );
     }, restaurantConfig.heroSlideInterval);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentImageIndex]);
 
   const scrollToInfo = () => {
     document.getElementById("info-section")?.scrollIntoView({ 
@@ -38,7 +40,8 @@ const HeroSection = () => {
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
           style={{
             backgroundImage: `url(${image})`,
-            opacity: index === currentImageIndex ? 1 : 0,
+            opacity: index === currentImageIndex || index === prevImageIndex ? 1 : 0,
+            zIndex: index === currentImageIndex ? 2 : index === prevImageIndex ? 1 : 0,
             transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           aria-hidden="true"
