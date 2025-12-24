@@ -4,7 +4,8 @@ import { restaurantConfig } from "@/config/restaurant";
 
 const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [prevImageIndex, setPrevImageIndex] = useState<number | null>(null);
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -14,16 +15,27 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    // Crossfade image slider with proper layering
+    // Start crossfade transition
     const interval = setInterval(() => {
-      setPrevImageIndex(currentImageIndex);
+      setIsTransitioning(true);
       setCurrentImageIndex((prev) => 
         (prev + 1) % restaurantConfig.heroImages.length
       );
     }, restaurantConfig.heroSlideInterval);
 
     return () => clearInterval(interval);
-  }, [currentImageIndex]);
+  }, []);
+
+  useEffect(() => {
+    // After transition completes, update base layer
+    if (isTransitioning) {
+      const timeout = setTimeout(() => {
+        setDisplayIndex(currentImageIndex);
+        setIsTransitioning(false);
+      }, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentImageIndex, isTransitioning]);
 
   const scrollToInfo = () => {
     document.getElementById("info-section")?.scrollIntoView({ 
@@ -33,29 +45,36 @@ const HeroSection = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Images with Crossfade */}
-      {restaurantConfig.heroImages.map((image, index) => (
-        <div
-          key={image}
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
-          style={{
-            backgroundImage: `url(${image})`,
-            opacity: index === currentImageIndex || index === prevImageIndex ? 1 : 0,
-            zIndex: index === currentImageIndex ? 2 : index === prevImageIndex ? 1 : 0,
-            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-          aria-hidden="true"
-        />
-      ))}
+      {/* Base Layer - shows previous/stable image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${restaurantConfig.heroImages[displayIndex]})`,
+          zIndex: 1,
+        }}
+        aria-hidden="true"
+      />
 
-      {/* Dark Gradient Overlay */}
+      {/* Transition Layer - fades in new image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-out"
+        style={{
+          backgroundImage: `url(${restaurantConfig.heroImages[currentImageIndex]})`,
+          zIndex: 2,
+          opacity: isTransitioning ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Dark Gradient Overlay - always on top */}
       <div 
         className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/90"
+        style={{ zIndex: 3 }}
         aria-hidden="true"
       />
 
       {/* Centered Logo */}
-      <div className="relative z-10 flex h-full items-center justify-center">
+      <div className="relative flex h-full items-center justify-center" style={{ zIndex: 10 }}>
         <img
           src={restaurantConfig.logoUrl}
           alt={restaurantConfig.name}
@@ -70,7 +89,8 @@ const HeroSection = () => {
       {/* Scroll Hint */}
       <button
         onClick={scrollToInfo}
-        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-foreground/60 transition-colors hover:text-foreground"
+        className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-foreground/60 transition-colors hover:text-foreground"
+        style={{ zIndex: 10 }}
         aria-label="Scroll to content"
       >
         <Mouse className="h-6 w-6 animate-scroll-hint" strokeWidth={1.5} />
