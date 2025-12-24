@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 /* La Garda am Freibad — Premium Dark Design System */
-/* Fonts: Playfair Display (serif headlines) + Inter (sans body) */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+/* Fonts: Forum (serif headlines) + Inter (sans body) */
 
 @layer base {
   :root {
@@ -46,7 +44,7 @@
     --italian-red: 0 70% 45%;
 
     /* Typography */
-    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-serif: 'Forum', Georgia, serif;
     --font-sans: 'Inter', system-ui, sans-serif;
 
     /* Transitions */
