@@ -4,7 +4,7 @@
 export const restaurantConfig = {
   // Basic Info
   name: "La Garda am Freibad",
-  tagline: "Italienischer Genuss in Ahlen",
+  tagline: "Echter italienischer Genuss, der man schmeckt in Ahlen",
   description:
     "La Garda steht für ehrliche italienische Küche, zubereitet mit hochwertigen Zutaten und viel Liebe zum Detail. Von knuspriger Pizza aus dem Steinofen bis zu feiner Pasta und klassischen Spezialitäten – bei uns geht es um echten Geschmack, nicht um Kompromisse. Ob im Restaurant oder bequem nach Hause geliefert: La Garda bringt ein Stück Italien auf Ihren Teller.",
 
