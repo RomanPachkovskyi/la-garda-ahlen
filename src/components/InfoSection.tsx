@@ -4,40 +4,61 @@ import { Button } from "@/components/ui/button";
 import { restaurantConfig } from "@/config/restaurant";
 const InfoSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [prevImageIndex, setPrevImageIndex] = useState<number | null>(null);
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Crossfade image slider with proper layering
+    // Start crossfade transition
     const interval = setInterval(() => {
-      setPrevImageIndex(currentImageIndex);
+      setIsTransitioning(true);
       setCurrentImageIndex((prev) => (prev + 1) % restaurantConfig.infoImages.length);
     }, restaurantConfig.heroSlideInterval);
     return () => clearInterval(interval);
-  }, [currentImageIndex]);
+  }, []);
+
+  useEffect(() => {
+    // After transition completes, update base layer
+    if (isTransitioning) {
+      const timeout = setTimeout(() => {
+        setDisplayIndex(currentImageIndex);
+        setIsTransitioning(false);
+      }, 1500);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentImageIndex, isTransitioning]);
   return (
     <>
       {/* Full-screen Info Section with Slideshow */}
       <section id="info-section" className="relative flex min-h-screen items-center">
-        {/* Background Images with Crossfade */}
-        {restaurantConfig.infoImages.map((image, index) => (
-          <div
-            key={image}
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
-            style={{
-              backgroundImage: `url('${image}')`,
-              opacity: index === currentImageIndex || index === prevImageIndex ? 1 : 0,
-              zIndex: index === currentImageIndex ? 2 : index === prevImageIndex ? 1 : 0,
-              transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-            }}
-            aria-hidden="true"
-          />
-        ))}
+        {/* Base Layer - shows previous/stable image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${restaurantConfig.infoImages[displayIndex]}')`,
+            zIndex: 1,
+          }}
+          aria-hidden="true"
+        />
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
+        {/* Transition Layer - fades in new image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-out"
+          style={{
+            backgroundImage: `url('${restaurantConfig.infoImages[currentImageIndex]}')`,
+            zIndex: 2,
+            opacity: isTransitioning ? 1 : 0,
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Dark Overlay - always on top */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40"
+          style={{ zIndex: 3 }}
+        />
 
         {/* Content */}
-        <div className="container relative z-10 mx-auto px-6 py-20 md:px-12 lg:px-16">
+        <div className="container relative mx-auto px-6 py-20 md:px-12 lg:px-16" style={{ zIndex: 10 }}>
           <div className="max-w-2xl">
             {/* Tagline */}
             <h1 className="font-serif text-4xl uppercase leading-tight tracking-wide text-foreground md:text-5xl lg:text-6xl">
