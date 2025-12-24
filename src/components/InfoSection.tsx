@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapPin, Phone, Clock, Star, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Clock, Star, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { restaurantConfig } from "@/config/restaurant";
 
@@ -73,7 +73,7 @@ const InfoSection = () => {
                   rel="noopener noreferrer"
                 >
                   Menü – Mittag
-                  <ExternalLink className="ml-2 h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100" />
+                  <ArrowUpRight className="ml-2 h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
                 </a>
               </Button>
               
@@ -89,7 +89,7 @@ const InfoSection = () => {
                   rel="noopener noreferrer"
                 >
                   Menü – Abend
-                  <ExternalLink className="ml-2 h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100" />
+                  <ArrowUpRight className="ml-2 h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100" strokeWidth={1.5} />
                 </a>
               </Button>
             </div>
@@ -97,16 +97,22 @@ const InfoSection = () => {
         </div>
       </section>
 
-      {/* Minimal Contact Strip */}
-      <section className="border-t border-border/30 bg-background py-8 md:py-10">
+      {/* Contact Strip - Two Columns */}
+      <section className="border-t border-border/30 bg-background py-6">
         <div className="container mx-auto px-6 md:px-12 lg:px-16">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            {/* Left: Address & Phone */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-              <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center">
+            {/* Left Column (65%) - Address, Phone, Hours stacked */}
+            <div className="flex flex-1 flex-col gap-3 md:basis-[65%] md:flex-row md:items-center md:gap-8">
+              <a 
+                href={restaurantConfig.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-muted-foreground"
+              >
                 <MapPin className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
-                <span className="text-sm text-foreground">{restaurantConfig.address}</span>
-              </div>
+                {restaurantConfig.address}
+              </a>
+              
               <a 
                 href={`tel:${restaurantConfig.phone}`}
                 className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-muted-foreground"
@@ -114,38 +120,32 @@ const InfoSection = () => {
                 <Phone className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
                 {restaurantConfig.phone}
               </a>
-            </div>
-
-            {/* Center: Hours (compact) */}
-            <div className="flex items-center gap-3">
-              <Clock className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
-              <span className="text-sm text-muted-foreground">
-                {restaurantConfig.hours.map((slot, i) => (
-                  <span key={i}>
-                    {slot.days}: {slot.time}
-                    {i < restaurantConfig.hours.length - 1 && " · "}
-                  </span>
-                ))}
-              </span>
-            </div>
-
-            {/* Right: Rating & Maps */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 fill-foreground text-foreground" />
-                <span className="text-sm font-medium text-foreground">
-                  {restaurantConfig.googleRating}
+              
+              <div className="flex items-center gap-3">
+                <Clock className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                <span className="text-sm text-muted-foreground">
+                  {restaurantConfig.hours.map((slot, i) => (
+                    <span key={i}>
+                      {slot.days}: {slot.time}
+                      {i < restaurantConfig.hours.length - 1 && " · "}
+                    </span>
+                  ))}
                 </span>
               </div>
-              
+            </div>
+
+            {/* Right Column (35%) - Google Rating */}
+            <div className="flex items-center justify-start gap-4 md:basis-[35%] md:justify-end">
               <a 
-                href={restaurantConfig.googleMapsUrl} 
-                target="_blank" 
+                href={restaurantConfig.googleMapsUrl}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="flex items-center gap-2 text-sm text-foreground transition-colors hover:text-muted-foreground"
               >
-                <MapPin className="h-4 w-4" />
-                Google Maps
+                <Star className="h-4 w-4 fill-foreground text-foreground" />
+                <span className="font-medium">{restaurantConfig.googleRating}</span>
+                <span className="text-muted-foreground">Google</span>
+                <ArrowUpRight className="h-3 w-3 text-muted-foreground" strokeWidth={1.5} />
               </a>
             </div>
           </div>
