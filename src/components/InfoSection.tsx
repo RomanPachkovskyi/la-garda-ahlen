@@ -65,9 +65,9 @@ const InfoSection = () => {
       {/* Contact Strip - Two Columns */}
       <section className="border-t border-border/30 bg-background py-6">
         <div className="container mx-auto px-6 md:px-12 lg:px-16">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center">
+          <div className="flex flex-col gap-6 md:items-start md:justify-center md:flex md:flex-row">
             {/* Left Column (65%) - Address, Phone, Hours stacked */}
-            <div className="flex flex-1 flex-col gap-3 md:basis-[65%] md:flex-col py-0 my-[20px] md:gap-[35px] md:flex md:items-start md:justify-center">
+            <div className="flex flex-1 flex-col gap-3 md:basis-[65%] md:flex-col py-0 my-[20px] md:flex md:items-start md:justify-center md:gap-[13px]">
               <a href={restaurantConfig.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-muted-foreground">
                 <MapPin className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
                 {restaurantConfig.address}
