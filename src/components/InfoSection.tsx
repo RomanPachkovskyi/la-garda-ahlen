@@ -93,6 +93,9 @@ const InfoSection = () => {
           <div className="flex flex-col gap-6 md:items-center md:justify-center md:flex md:flex-row">
             {/* Left Column (65%) - Address, Phone, Hours stacked */}
             <div className="flex flex-1 flex-col gap-3 md:basis-[65%] md:flex-col py-0 my-[20px] md:flex md:items-start md:justify-center md:gap-[13px]">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                Ristorante · Pizzeria · Lieferung
+              </p>
               <a
                 href={restaurantConfig.googleMapsUrl}
                 target="_blank"
@@ -111,16 +114,21 @@ const InfoSection = () => {
                 {restaurantConfig.phone}
               </a>
 
-              <div className="flex items-center gap-3">
-                <Clock className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
-                <span className="text-sm text-muted-foreground">
-                  {restaurantConfig.hours.map((slot, i) => (
-                    <span key={i}>
-                      {slot.days}: {slot.time}
-                      {i < restaurantConfig.hours.length - 1 && " · "}
-                    </span>
-                  ))}
-                </span>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-3">
+                  <Clock className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                  <span className="text-sm text-muted-foreground">
+                    {restaurantConfig.hours.map((slot, i) => (
+                      <span key={i}>
+                        {slot.days}: {slot.time}
+                        {i < restaurantConfig.hours.length - 1 && " · "}
+                      </span>
+                    ))}
+                  </span>
+                </div>
+                <p className="ml-7 text-xs italic text-muted-foreground">
+                  Wir freuen uns auf Ihren Besuch.
+                </p>
               </div>
             </div>
 
