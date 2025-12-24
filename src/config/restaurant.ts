@@ -64,5 +64,6 @@ export const restaurantConfig = {
   logoUrl: "/lagarda_logo.svg",
 
   // Slider timing (ms)
-  heroSlideInterval: 7000,
+  heroSlideInterval: 7000,    // Інтервал між слайдами
+  crossfadeDuration: 2000,    // Тривалість crossfade переходу
 };
