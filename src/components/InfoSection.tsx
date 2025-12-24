@@ -47,7 +47,7 @@ const InfoSection = () => {
             </div>
 
             {/* Description */}
-            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               {restaurantConfig.description}
             </p>
 
