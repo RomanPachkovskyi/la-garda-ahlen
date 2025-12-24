@@ -23,7 +23,15 @@ const Footer = () => {
         
         {/* Credit */}
         <p className="text-xs text-muted-foreground/60">
-          Digitales Handwerk mit <span className="text-italian-red">♥</span> bei Munas-Print
+          Digitales Handwerk mit <span className="text-italian-red">♥</span> bei{" "}
+          <a
+            href="https://munas-print.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            Munas-Print
+          </a>
         </p>
       </div>
     </footer>

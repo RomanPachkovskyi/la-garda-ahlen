@@ -30,19 +30,18 @@ export const restaurantConfig = {
     "La Garda steht für ehrliche italienische Küche, zubereitet mit hochwertigen Zutaten und viel Liebe zum Detail. Von knuspriger Pizza aus dem Steinofen bis zu feiner Pasta und klassischen Spezialitäten – bei uns geht es um echten Geschmack, nicht um Kompromisse. Ob im Restaurant oder bequem nach Hause geliefert: La Garda bringt ein Stück Italien auf Ihren Teller.",
 
   // Hero Section Images (crossfade slider)
-  // Замініть на ваші фото: "/images/hero-1.jpg", "/images/hero-2.jpg", тощо
+  // Щоб додати свої фото:
+  // 1. Додай файли в public/images/ (наприклад: hero-1.jpg, hero-2.jpg, hero-3.jpg)
+  // 2. Зміни масив нижче: ["/images/hero-1.jpg", "/images/hero-2.jpg", "/images/hero-3.jpg"]
+  // 3. npm run build → файли автоматично потраплять в dist/images/
   heroImages: [
-    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80",
-    "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80",
-    "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80",
+    "/images/info-bg.jpg",
   ],
 
   // Info Section Images (crossfade slider)
-  // Замініть на ваші фото: "/images/info-1.jpg", "/images/info-2.jpg", тощо
+  // Аналогічно - додавай свої фото в public/images/
   infoImages: [
-    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80",
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80",
-    "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=80",
+    "/images/info-bg.jpg",
   ],
 
   // Menu PDFs
