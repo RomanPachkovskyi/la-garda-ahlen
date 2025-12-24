@@ -33,7 +33,7 @@ const InfoSection = () => {
 
         {/* Content */}
         <div className="container relative z-10 mx-auto px-6 py-20 md:px-12 lg:px-16">
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             {/* Tagline */}
             <h1 className="font-serif text-4xl uppercase leading-tight tracking-wide text-foreground md:text-5xl lg:text-6xl">
               {restaurantConfig.tagline}
@@ -47,7 +47,7 @@ const InfoSection = () => {
             </div>
 
             {/* Description */}
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               {restaurantConfig.description}
             </p>
 
