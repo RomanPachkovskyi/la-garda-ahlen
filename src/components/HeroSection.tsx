@@ -35,10 +35,11 @@ const HeroSection = () => {
       {restaurantConfig.heroImages.map((image, index) => (
         <div
           key={image}
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ease-in-out"
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
           style={{
             backgroundImage: `url(${image})`,
             opacity: index === currentImageIndex ? 1 : 0,
+            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           aria-hidden="true"
         />
