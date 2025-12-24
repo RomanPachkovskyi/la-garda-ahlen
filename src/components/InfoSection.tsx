@@ -1,20 +1,40 @@
+import { useState, useEffect } from "react";
 import { MapPin, Phone, Clock, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { restaurantConfig } from "@/config/restaurant";
 
 const InfoSection = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => 
+        (prev + 1) % restaurantConfig.infoImages.length
+      );
+    }, restaurantConfig.heroSlideInterval);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      {/* Full-screen Info Section */}
+      {/* Full-screen Info Section with Slideshow */}
       <section 
         id="info-section" 
         className="relative flex min-h-screen items-center"
       >
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${restaurantConfig.infoImage}')` }}
-        />
+        {/* Background Images with Crossfade */}
+        {restaurantConfig.infoImages.map((image, index) => (
+          <div
+            key={image}
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ease-in-out"
+            style={{
+              backgroundImage: `url('${image}')`,
+              opacity: index === currentImageIndex ? 1 : 0,
+            }}
+            aria-hidden="true"
+          />
+        ))}
         
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
@@ -23,7 +43,7 @@ const InfoSection = () => {
         <div className="container relative z-10 mx-auto px-6 py-20 md:px-12 lg:px-16">
           <div className="max-w-xl">
             {/* Tagline */}
-            <h1 className="font-serif text-4xl font-medium uppercase leading-tight tracking-wide text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="font-serif text-4xl uppercase leading-tight tracking-wide text-foreground md:text-5xl lg:text-6xl">
               {restaurantConfig.tagline}
             </h1>
             
@@ -77,84 +97,56 @@ const InfoSection = () => {
         </div>
       </section>
 
-      {/* Contact Info Section */}
-      <section className="bg-background py-20 md:py-28">
+      {/* Minimal Contact Strip */}
+      <section className="border-t border-border/30 bg-background py-8 md:py-10">
         <div className="container mx-auto px-6 md:px-12 lg:px-16">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-            {/* Address */}
-            <div className="flex items-start gap-4">
-              <MapPin className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                  Adresse
-                </h3>
-                <p className="mt-2 text-foreground">
-                  {restaurantConfig.address}
-                </p>
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            {/* Left: Address & Phone */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                <span className="text-sm text-foreground">{restaurantConfig.address}</span>
               </div>
+              <a 
+                href={`tel:${restaurantConfig.phone}`}
+                className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-muted-foreground"
+              >
+                <Phone className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                {restaurantConfig.phone}
+              </a>
             </div>
 
-            {/* Phone */}
-            <div className="flex items-start gap-4">
-              <Phone className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                  Telefon
-                </h3>
-                <a 
-                  href={`tel:${restaurantConfig.phone}`}
-                  className="mt-2 block text-foreground transition-colors hover:text-muted-foreground"
-                >
-                  {restaurantConfig.phone}
-                </a>
-              </div>
+            {/* Center: Hours (compact) */}
+            <div className="flex items-center gap-3">
+              <Clock className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+              <span className="text-sm text-muted-foreground">
+                {restaurantConfig.hours.map((slot, i) => (
+                  <span key={i}>
+                    {slot.days}: {slot.time}
+                    {i < restaurantConfig.hours.length - 1 && " · "}
+                  </span>
+                ))}
+              </span>
             </div>
 
-            {/* Hours */}
-            <div className="flex items-start gap-4">
-              <Clock className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
-              <div>
-                <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                  Öffnungszeiten
-                </h3>
-                <div className="mt-2 space-y-1">
-                  {restaurantConfig.hours.map((slot, i) => (
-                    <p key={i} className="text-foreground">
-                      <span className="text-muted-foreground">{slot.days}:</span>{" "}
-                      {slot.time}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Rating & Maps */}
-            <div className="flex flex-col gap-4">
-              {/* Google Rating Badge */}
+            {/* Right: Rating & Maps */}
+            <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 fill-foreground text-foreground" />
-                <span className="text-lg font-medium text-foreground">
+                <Star className="h-4 w-4 fill-foreground text-foreground" />
+                <span className="text-sm font-medium text-foreground">
                   {restaurantConfig.googleRating}
                 </span>
-                <span className="text-sm text-muted-foreground">auf Google</span>
               </div>
               
-              {/* Maps Button */}
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="w-fit text-muted-foreground hover:text-foreground"
+              <a 
+                href={restaurantConfig.googleMapsUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                <a 
-                  href={restaurantConfig.googleMapsUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <MapPin className="mr-2 h-4 w-4" />
-                  In Google Maps öffnen
-                </a>
-              </Button>
+                <MapPin className="h-4 w-4" />
+                Google Maps
+              </a>
             </div>
           </div>
         </div>
