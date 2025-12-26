@@ -52,7 +52,7 @@
   /* Animation: draw (2.5s) → fill (1s) */
   animation:
     luxury-draw 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
-    luxury-fill 1.0s cubic-bezier(0.3, 0, 0.2, 1) 2.5s forwards;
+    luxury-fill 1.0s cubic-bezier(0.3, 0, 0.2, 1) 0.5s forwards;
 }
 
 /* 2. LINE - fade in after main text */
