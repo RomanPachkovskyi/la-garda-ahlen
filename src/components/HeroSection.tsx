@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Mouse } from "lucide-react";
 import { restaurantConfig } from "@/config/restaurant";
-import AnimatedLogo from "@/components/AnimatedLogo";
+import LuxuryAnimatedLogo from "@/components/LuxuryAnimatedLogo";
 
 const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -77,11 +77,10 @@ const HeroSection = () => {
 
       {/* Centered Logo */}
       <div className="relative flex h-full items-center justify-center" style={{ zIndex: 10 }}>
-        <AnimatedLogo
-          className={`logo-white h-24 w-auto max-w-[280px] sm:h-32 sm:max-w-[360px] md:h-40 md:max-w-[440px] transition-opacity duration-[900ms] ease-out ${
+        <LuxuryAnimatedLogo
+          className={`h-[7.5rem] w-auto max-w-[350px] sm:h-40 sm:max-w-[450px] md:h-[12.5rem] md:max-w-[550px] transition-opacity duration-[900ms] ease-out ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
-          replay="none"
         />
       </div>
 
