@@ -30,20 +30,32 @@
     <meta property="og:url" content="https://lagarda-ahlen.de/" />
     <meta property="og:title" content="La Garda – Italienischer Genuss in Ahlen" />
     <meta property="og:description" content="Authentische italienische Küche, frische Zutaten und echte Leidenschaft – auch zur Lieferung." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80" />
+    <meta property="og:image" content="https://lagarda-ahlen.de/images/meta-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="La Garda Restaurant Ahlen" />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="La Garda" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://lagarda-ahlen.de/" />
     <meta name="twitter:title" content="La Garda – Italienischer Genuss in Ahlen" />
     <meta name="twitter:description" content="Authentische italienische Küche, frische Zutaten und echte Leidenschaft – auch zur Lieferung." />
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80" />
+    <meta name="twitter:image" content="https://lagarda-ahlen.de/images/meta-image.jpg" />
+    <meta name="twitter:image:alt" content="La Garda Restaurant Ahlen" />
 
     <!-- Additional SEO -->
     <meta name="geo.region" content="DE-NW" />
     <meta name="geo.placename" content="Ahlen" />
-    <meta name="keywords" content="italienisches Restaurant Ahlen, Pizzeria Ahlen, Pizza Ahlen, Pasta Ahlen, La Garda, italienische Küche, Lieferung Ahlen, Lieferservice Ahlen" />
+    <meta name="geo.position" content="51.7631;7.8906" />
+    <meta name="ICBM" content="51.7631, 7.8906" />
+    <meta name="keywords" content="italienisches Restaurant Ahlen, Pizzeria Ahlen, Pizza Ahlen, Pasta Ahlen, La Garda, italienische Küche, Restaurant Bürgermeister-Corneli-Ring, Ahlen Restaurant, italiano Ahlen" />
+
+    <!-- Business Contact -->
+    <meta name="contact" content="info@lagarda-ahlen.de" />
+    <meta name="contact-phone" content="+492382855355" />
+    <meta name="contact-address" content="Bürgermeister-Corneli-Ring 48, 59227 Ahlen" />
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -51,36 +63,68 @@
       "@context": "https://schema.org",
       "@type": "Restaurant",
       "name": "La Garda",
-      "description": "Italienisches Restaurant und Pizzeria in Ahlen mit Lieferung. La Garda steht für authentischen Geschmack, frische Zutaten und echte italienische Küche.",
-      "image": "https://lagarda-ahlen.de/lagarda_logo.svg",
+      "description": "Italienisches Restaurant und Pizzeria in Ahlen. La Garda steht für authentischen Geschmack, frische Zutaten und echte italienische Küche.",
+      "image": [
+        "https://lagarda-ahlen.de/images/meta-image.jpg",
+        "https://lagarda-ahlen.de/lagarda_logo.svg"
+      ],
+      "logo": "https://lagarda-ahlen.de/lagarda_logo.svg",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Am Freibad 1",
+        "streetAddress": "Bürgermeister-Corneli-Ring 48",
         "addressLocality": "Ahlen",
-        "postalCode": "59229",
+        "postalCode": "59227",
         "addressCountry": "DE"
       },
-      "telephone": "+49 2382 123456",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "51.7631",
+        "longitude": "7.8906"
+      },
+      "telephone": "+492382855355",
+      "email": "info@lagarda-ahlen.de",
       "servesCuisine": "Italian",
-      "priceRange": "€€",
+      "priceRange": "€",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "11:30",
-          "closes": "14:30"
+          "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "17:00",
+          "closes": "21:30"
+        }
+      ],
+      "acceptsReservations": true,
+      "menu": "https://lagarda-ahlen.de/#menu",
+      "potentialAction": [
+        {
+          "@type": "OrderAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://lagarda-ahlen.de/#menu",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Order",
+            "name": "Speisekarte"
+          }
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "17:30",
-          "closes": "22:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Saturday", "Sunday"],
-          "opens": "12:00",
-          "closes": "22:00"
+          "@type": "ReserveAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://lagarda-ahlen.de/#reservation",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Reservation",
+            "name": "Reservierung"
+          }
         }
       ],
       "aggregateRating": {
@@ -89,7 +133,11 @@
         "bestRating": "5",
         "ratingCount": "150"
       },
-      "url": "https://lagarda-ahlen.de"
+      "url": "https://lagarda-ahlen.de",
+      "sameAs": [
+        "https://www.facebook.com/lagardaahlen",
+        "https://www.instagram.com/lagardaahlen"
+      ]
     }
     </script>
     
