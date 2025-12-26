@@ -1,0 +1,56 @@
+/* La Garda Ahlen — Logo Motion (SVG line-draw + fill)
+   Usage: inline the SVG (not <img>) and wrap it with .lagarda-logo
+*/
+.lagarda-logo svg{
+  display:block;
+  width:auto;
+  height:48px; /* adjust */
+}
+
+.lagarda-logo .lagarda-logo__path{
+  /* brand color (fallback) */
+  --logo-color: #72abaf;
+
+  fill: var(--logo-color);
+  stroke: var(--logo-color);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* start state */
+  fill-opacity: 0;
+  stroke-dasharray: var(--dash, 1);
+  stroke-dashoffset: var(--dash, 1);
+}
+
+/* Play once on load (JS adds .is-anim) */
+.lagarda-logo.is-anim .lagarda-logo__path{
+  animation:
+    lagarda-draw 1.05s cubic-bezier(.2,.8,.2,1) forwards,
+    lagarda-fill .45s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: 0s, .9s;
+}
+
+@keyframes lagarda-draw{
+  to{ stroke-dashoffset: 0; }
+}
+@keyframes lagarda-fill{
+  to{ fill-opacity: 1; }
+}
+
+/* Optional: replay on hover (desktop) */
+.lagarda-logo[data-replay="hover"]:hover .lagarda-logo__path{
+  animation:
+    lagarda-draw .9s cubic-bezier(.2,.8,.2,1) forwards,
+    lagarda-fill .35s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: 0s, .75s;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .lagarda-logo .lagarda-logo__path{
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+    animation: none !important;
+  }
+}
