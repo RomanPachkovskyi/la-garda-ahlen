@@ -78,7 +78,7 @@ const HeroSection = () => {
       {/* Centered Logo */}
       <div className="relative flex h-full items-center justify-center" style={{ zIndex: 10 }}>
         <LuxuryAnimatedLogo
-          className={`h-30 w-auto max-w-[350px] sm:h-40 sm:max-w-[450px] md:h-50 md:max-w-[550px] transition-opacity duration-[900ms] ease-out ${
+          className={`h-[7.5rem] w-auto max-w-[350px] sm:h-40 sm:max-w-[450px] md:h-[12.5rem] md:max-w-[550px] transition-opacity duration-[900ms] ease-out ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         />
