@@ -23,13 +23,21 @@ const LuxuryAnimatedLogo = ({ className = '' }: LuxuryAnimatedLogoProps) => {
 
       console.log('[LuxuryLogo] Main text path length:', pathLength);
 
-      // Trigger animation after a small delay
-      requestAnimationFrame(() => {
+      // Reset animation state first
+      logoRef.current.classList.remove('animate');
+
+      // Force reflow to ensure CSS reset
+      void logoRef.current.offsetWidth;
+
+      // Trigger animation with delay to ensure DOM is ready
+      const timer = setTimeout(() => {
         if (logoRef.current) {
           logoRef.current.classList.add('animate');
           console.log('[LuxuryLogo] Animation started');
         }
-      });
+      }, 150);
+
+      return () => clearTimeout(timer);
     } catch (error) {
       console.warn('[LuxuryLogo] Animation setup failed:', error);
       // Fallback: show logo without animation
