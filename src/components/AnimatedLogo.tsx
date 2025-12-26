@@ -34,6 +34,7 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
       ref={logoRef}
       className={`lagarda-logo ${className}`}
       data-replay={replay}
+      style={{ display: 'block', width: 'auto' }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +43,7 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
         viewBox="0 0 272.5 85"
         role="img"
         aria-label="La Garda Ahlen logo"
+        style={{ display: 'block', width: '100%', height: 'auto' }}
       >
         <path
           className="lagarda-logo__path"

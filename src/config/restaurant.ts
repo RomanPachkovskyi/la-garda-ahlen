@@ -35,13 +35,15 @@ export const restaurantConfig = {
   // 2. Зміни масив нижче: ["/images/hero-1.jpg", "/images/hero-2.jpg", "/images/hero-3.jpg"]
   // 3. npm run build → файли автоматично потраплять в dist/images/
   heroImages: [
-    "/images/info-bg.jpg",
+    "/images/la-garda-ahlen_01.jpg",
   ],
 
   // Info Section Images (crossfade slider)
   // Аналогічно - додавай свої фото в public/images/
   infoImages: [
-    "/images/info-bg.jpg",
+    "/images/la-garda-ahlen_02.jpg",
+    "/images/la-garda-ahlen_03.jpg",
+    "/images/la-garda-ahlen_04.jpg",
   ],
 
   // Menu PDFs
