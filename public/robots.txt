@@ -1,27 +1,163 @@
-# La Garda am Freibad - robots.txt
+##############################################
+# GALABAU HESSO — PROFESSIONAL ROBOTS.TXT
+# SEO + AI Friendly + Anti-Abuse + Low-Load
+##############################################
 
-User-agent: *
-Allow: /
+##############################################
+# 1 SEARCH ENGINE CRAWLERS - allowed
+##############################################
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
-
-# Sitemap location
-Sitemap: https://lagarda-ahlen.de/sitemap.xml
-
-# Block access to admin/private areas (if any)
-Disallow: /api/
-Disallow: /admin/
-
-# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+
+##############################################
+# 2 AI CRAWLERS - allowed for content visibility
+##############################################
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# LLM metadata file Yoast
+Allow: /llms.txt
+
+
+##############################################
+# 3 SOCIAL MEDIA CRAWLERS preview cards
+##############################################
+
+User-agent: facebookexternalhit
 Allow: /
 
 User-agent: Twitterbot
 Allow: /
 
-User-agent: facebookexternalhit
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+
+##############################################
+# 4 BLOCK AGGRESSIVE LOAD-HEAVY SCANNERS
+##############################################
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+
+##############################################
+# 5 GLOBAL RULES FOR ALL OTHER USER AGENTS
+##############################################
+User-agent: *
+Allow: /
+
+# Protect sensitive system directories
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Allow: /wp-includes/
+
+Disallow: /cgi-bin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /admin/
+Disallow: /cms/
+
+# Block dangerous file types
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.inc$
+Disallow: /*.conf$
+
+# Allow key assets needed for rendering
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+
+# Allow Yoast SEO LLM content
+Allow: /llms.txt
+
+
+##############################################
+# 6 OPTIONAL: HONEYPOT TRAPS FOR BAD BOTS
+##############################################
+# These URLs don't exist — good bots will ignore them.
+# Bad scrapers hit them → instantly flagged server-side (optional).
+Disallow: /hidden-admin/
+Disallow: /secret-login/
+Disallow: /wp-admin2/
+Disallow: /fake-sitemap/
+Disallow: /dev-test/
+
+
+##############################################
+# 7 SITEMAPS
+##############################################
+Sitemap: https://galabau-hesso.de/sitemap_index.xml
+Sitemap: https://galabau-hesso.de/page-sitemap.xml
