@@ -10,27 +10,40 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!logoRef.current) return;
+    console.log('[Logo] Component mounted');
+
+    if (!logoRef.current) {
+      console.warn('[Logo] No logoRef');
+      return;
+    }
 
     const path = logoRef.current.querySelector<SVGPathElement>('.lagarda-logo__path');
-    if (!path) return;
+    if (!path) {
+      console.warn('[Logo] Path not found');
+      return;
+    }
+
+    console.log('[Logo] Path element found');
 
     // Calculate path length for stroke animation
     try {
       const pathLength = Math.ceil(path.getTotalLength());
+      console.log('[Logo] Path length:', pathLength);
 
       // Set the CSS variable for stroke-dasharray
       path.style.setProperty('--path-length', String(pathLength));
+      console.log('[Logo] CSS variable set');
 
       // Trigger animation with a small delay to ensure CSS is ready
       requestAnimationFrame(() => {
         if (logoRef.current) {
           logoRef.current.classList.add('lagarda-logo--animated');
+          console.log('[Logo] Animation class added');
         }
       });
     } catch (error) {
       // If getTotalLength fails, logo will show in default state
-      console.warn('Logo animation failed:', error);
+      console.warn('[Logo] Animation failed:', error);
     }
   }, []);
 
