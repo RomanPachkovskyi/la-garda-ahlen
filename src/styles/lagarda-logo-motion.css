@@ -1,69 +1,81 @@
-/* La Garda Ahlen — Logo Motion (SVG line-draw + fill)
-   Usage: inline the SVG (not <img>) and wrap it with .lagarda-logo
-*/
-.lagarda-logo svg{
-  display:block;
-  width:auto;
-  height:100%; /* inherit from parent */
+/* La Garda — Animated Logo */
+
+.lagarda-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.lagarda-logo .lagarda-logo__path{
-  /* brand color (fallback) */
+.lagarda-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Default state - fully visible (fallback if JS fails) */
+.lagarda-logo__path {
   --logo-color: #72abaf;
 
   fill: var(--logo-color);
   stroke: var(--logo-color);
-  stroke-width: 0.5;
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
 
-  /* Default visible state (fallback if JS doesn't load) */
   fill-opacity: 1;
-  stroke-dasharray: none;
-  stroke-dashoffset: 0;
+  opacity: 1;
 }
 
-/* Prepare for animation ONLY when JS is ready */
-.lagarda-logo.ready-to-animate .lagarda-logo__path{
-  fill-opacity: 0;
-  stroke-width: 1.6;
-  stroke-dasharray: var(--dash, 1);
-  stroke-dashoffset: var(--dash, 1);
-}
-
-/* White logo variant */
-.logo-white .lagarda-logo__path{
+/* White variant */
+.logo-white .lagarda-logo__path {
   --logo-color: #ffffff;
 }
 
-/* Play once on load (JS adds .is-anim) */
-.lagarda-logo.is-anim .lagarda-logo__path{
+/* Animated state - stroke-draw effect */
+.lagarda-logo--animated .lagarda-logo__path {
+  /* Start invisible with no fill */
+  fill-opacity: 0;
+  opacity: 0;
+  stroke-width: 2;
+
+  /* Set up stroke-dash for drawing effect */
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+
+  /* Three-stage animation: fade in → draw stroke → fill */
   animation:
-    lagarda-draw 1.05s cubic-bezier(.2,.8,.2,1) forwards,
-    lagarda-fill .45s cubic-bezier(.2,.8,.2,1) forwards;
-  animation-delay: 0s, .9s;
+    fadeIn 0.5s ease-out 0.2s forwards,
+    drawStroke 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards,
+    fillLogo 0.8s ease-out 2.3s forwards;
 }
 
-@keyframes lagarda-draw{
-  to{ stroke-dashoffset: 0; }
-}
-@keyframes lagarda-fill{
-  to{ fill-opacity: 1; }
-}
-
-/* Optional: replay on hover (desktop) */
-.lagarda-logo[data-replay="hover"]:hover .lagarda-logo__path{
-  animation:
-    lagarda-draw .9s cubic-bezier(.2,.8,.2,1) forwards,
-    lagarda-fill .35s cubic-bezier(.2,.8,.2,1) forwards;
-  animation-delay: 0s, .75s;
+/* Keyframe animations */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .lagarda-logo .lagarda-logo__path{
+@keyframes drawStroke {
+  to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillLogo {
+  to {
     fill-opacity: 1;
+    stroke-width: 1;
+  }
+}
+
+/* Reduced motion - skip animation */
+@media (prefers-reduced-motion: reduce) {
+  .lagarda-logo__path {
+    opacity: 1 !important;
+    fill-opacity: 1 !important;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
     animation: none !important;
   }
 }

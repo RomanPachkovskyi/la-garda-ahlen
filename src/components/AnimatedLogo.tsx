@@ -15,26 +15,21 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
     const path = logoRef.current.querySelector<SVGPathElement>('.lagarda-logo__path');
     if (!path) return;
 
-    // Ensure the SVG is in the DOM so getTotalLength works
+    // Calculate path length for stroke animation
     try {
-      const len = Math.ceil(path.getTotalLength());
-      path.style.setProperty('--dash', String(len));
+      const pathLength = Math.ceil(path.getTotalLength());
 
-      // Prepare for animation
+      // Set the CSS variable for stroke-dasharray
+      path.style.setProperty('--path-length', String(pathLength));
+
+      // Trigger animation with a small delay to ensure CSS is ready
       requestAnimationFrame(() => {
         if (logoRef.current) {
-          logoRef.current.classList.add('ready-to-animate');
-
-          // Trigger animation after preparing
-          requestAnimationFrame(() => {
-            if (logoRef.current) {
-              logoRef.current.classList.add('is-anim');
-            }
-          });
+          logoRef.current.classList.add('lagarda-logo--animated');
         }
       });
     } catch (error) {
-      // If getTotalLength fails, just show the logo without animation
+      // If getTotalLength fails, logo will show in default state
       console.warn('Logo animation failed:', error);
     }
   }, []);
