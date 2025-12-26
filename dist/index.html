@@ -93,14 +93,26 @@
           "closes": "21:30"
         }
       ],
-      "acceptsReservations": true,
-      "menu": "https://lagarda-ahlen.de/#menu",
+      "hasMenu": [
+        {
+          "@type": "Menu",
+          "name": "Menü zur Lieferung",
+          "description": "Pizza Taxi Lieferkarte",
+          "url": "https://lagarda-ahlen.de/menu/flyer_pizzataxi.pdf"
+        },
+        {
+          "@type": "Menu",
+          "name": "Menü im Restaurant",
+          "description": "Restaurant Speisekarte",
+          "url": "https://lagarda-ahlen.de/menu/speisekarte_restaurant.pdf"
+        }
+      ],
       "potentialAction": [
         {
           "@type": "OrderAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://lagarda-ahlen.de/#menu",
+            "urlTemplate": "https://lagarda-ahlen.de/menu/flyer_pizzataxi.pdf",
             "actionPlatform": [
               "http://schema.org/DesktopWebPlatform",
               "http://schema.org/MobileWebPlatform"
@@ -108,22 +120,22 @@
           },
           "result": {
             "@type": "Order",
-            "name": "Speisekarte"
+            "name": "Menü zur Lieferung"
           }
         },
         {
-          "@type": "ReserveAction",
+          "@type": "OrderAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://lagarda-ahlen.de/#reservation",
+            "urlTemplate": "https://lagarda-ahlen.de/menu/speisekarte_restaurant.pdf",
             "actionPlatform": [
               "http://schema.org/DesktopWebPlatform",
               "http://schema.org/MobileWebPlatform"
             ]
           },
           "result": {
-            "@type": "Reservation",
-            "name": "Reservierung"
+            "@type": "Order",
+            "name": "Menü im Restaurant"
           }
         }
       ],
@@ -133,11 +145,7 @@
         "bestRating": "5",
         "ratingCount": "150"
       },
-      "url": "https://lagarda-ahlen.de",
-      "sameAs": [
-        "https://www.facebook.com/lagardaahlen",
-        "https://www.instagram.com/lagardaahlen"
-      ]
+      "url": "https://lagarda-ahlen.de"
     }
     </script>
     
