@@ -13,12 +13,20 @@
 
   fill: var(--logo-color);
   stroke: var(--logo-color);
-  stroke-width: 1.6;
+  stroke-width: 0.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 
-  /* start state */
+  /* Default visible state (fallback if JS doesn't load) */
+  fill-opacity: 1;
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+}
+
+/* Prepare for animation ONLY when JS is ready */
+.lagarda-logo.ready-to-animate .lagarda-logo__path{
   fill-opacity: 0;
+  stroke-width: 1.6;
   stroke-dasharray: var(--dash, 1);
   stroke-dashoffset: var(--dash, 1);
 }

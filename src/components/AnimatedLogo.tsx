@@ -16,17 +16,27 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
     if (!path) return;
 
     // Ensure the SVG is in the DOM so getTotalLength works
-    const len = Math.ceil(path.getTotalLength());
-    path.style.setProperty('--dash', String(len));
-    path.style.strokeDasharray = String(len);
-    path.style.strokeDashoffset = String(len);
+    try {
+      const len = Math.ceil(path.getTotalLength());
+      path.style.setProperty('--dash', String(len));
 
-    // Trigger CSS animations
-    requestAnimationFrame(() => {
-      if (logoRef.current) {
-        logoRef.current.classList.add('is-anim');
-      }
-    });
+      // Prepare for animation
+      requestAnimationFrame(() => {
+        if (logoRef.current) {
+          logoRef.current.classList.add('ready-to-animate');
+
+          // Trigger animation after preparing
+          requestAnimationFrame(() => {
+            if (logoRef.current) {
+              logoRef.current.classList.add('is-anim');
+            }
+          });
+        }
+      });
+    } catch (error) {
+      // If getTotalLength fails, just show the logo without animation
+      console.warn('Logo animation failed:', error);
+    }
   }, []);
 
   return (
