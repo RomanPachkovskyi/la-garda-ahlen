@@ -1,0 +1,130 @@
+/* La Garda Ahlen - Luxury Logo Animation
+   Slow, elegant, sophisticated
+*/
+
+.luxury-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.luxury-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ========================================
+   DEFAULT STATE (fallback if JS fails)
+   ======================================== */
+
+.logo-main-text,
+.logo-line,
+.logo-subtitle {
+  fill: #ffffff;
+  stroke: none;
+}
+
+/* No animation fallback - everything visible */
+.luxury-logo.no-animation .logo-main-text,
+.luxury-logo.no-animation .logo-line,
+.luxury-logo.no-animation .logo-subtitle {
+  opacity: 1;
+}
+
+/* ========================================
+   ANIMATION SEQUENCE
+   ======================================== */
+
+/* 1. MAIN TEXT: La Garda Ahlen - stroke-draw effect */
+.luxury-logo.animate .logo-main-text {
+  fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 0.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* Start with no fill, full stroke offset */
+  fill-opacity: 0;
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+
+  /* Animation: draw (2.5s) → fill (1s) */
+  animation:
+    luxury-draw 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
+    luxury-fill 1.0s cubic-bezier(0.3, 0, 0.2, 1) 2.5s forwards;
+}
+
+/* 2. LINE - fade in after main text */
+.luxury-logo.animate .logo-line {
+  opacity: 0;
+  animation: luxury-fade-in 0.8s ease-out 3.5s forwards;
+}
+
+/* 3. SUBTITLE: am Freibad - fade in last */
+.luxury-logo.animate .logo-subtitle {
+  opacity: 0;
+  animation: luxury-fade-in 0.8s ease-out 4.0s forwards;
+}
+
+/* ========================================
+   KEYFRAMES
+   ======================================== */
+
+/* Stroke draw animation */
+@keyframes luxury-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Fill animation */
+@keyframes luxury-fill {
+  to {
+    fill-opacity: 1;
+    stroke-width: 0;
+  }
+}
+
+/* Fade in animation */
+@keyframes luxury-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY - Reduced motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .luxury-logo .logo-main-text,
+  .luxury-logo .logo-line,
+  .luxury-logo .logo-subtitle {
+    opacity: 1 !important;
+    fill-opacity: 1 !important;
+    stroke: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ========================================
+   COLOR VARIANTS
+   ======================================== */
+
+/* Colored variant (not white) */
+.luxury-logo.logo-color .logo-main-text,
+.luxury-logo.logo-color .logo-line,
+.luxury-logo.logo-color .logo-subtitle {
+  fill: #72abaf;
+}
+
+.luxury-logo.logo-color.animate .logo-main-text {
+  stroke: #72abaf;
+}
