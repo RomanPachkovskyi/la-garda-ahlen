@@ -17,10 +17,7 @@
   --logo-color: #72abaf;
 
   fill: var(--logo-color);
-  stroke: var(--logo-color);
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke: none;
 
   fill-opacity: 1;
   opacity: 1;
@@ -33,10 +30,14 @@
 
 /* Animated state - stroke-draw effect */
 .lagarda-logo--animated .lagarda-logo__path {
-  /* Start invisible with no fill */
+  /* Start invisible with no fill, only stroke */
   fill-opacity: 0;
   opacity: 0;
+  fill: var(--logo-color);
+  stroke: var(--logo-color);
   stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 
   /* Set up stroke-dash for drawing effect */
   stroke-dasharray: var(--path-length);
@@ -65,7 +66,8 @@
 @keyframes fillLogo {
   to {
     fill-opacity: 1;
-    stroke-width: 1;
+    stroke-width: 0;
+    stroke: none;
   }
 }
 
@@ -74,6 +76,7 @@
   .lagarda-logo__path {
     opacity: 1 !important;
     fill-opacity: 1 !important;
+    stroke: none !important;
     stroke-dasharray: none !important;
     stroke-dashoffset: 0 !important;
     animation: none !important;
