@@ -1,27 +1,205 @@
-# La Garda am Freibad - robots.txt
+##############################################
+# LA GARDA AHLEN — PROFESSIONAL ROBOTS.TXT
+# SEO + AI Friendly + Anti-Abuse + Restaurant
+##############################################
 
-User-agent: *
-Allow: /
+##############################################
+# 1 SEARCH ENGINE CRAWLERS - allowed
+##############################################
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
-
-# Sitemap location
-Sitemap: https://lagarda-ahlen.de/sitemap.xml
-
-# Block access to admin/private areas (if any)
-Disallow: /api/
-Disallow: /admin/
-
-# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+
+
+##############################################
+# 2 AI CRAWLERS - allowed for content visibility
+##############################################
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# LLM metadata file for AI understanding
+Allow: /llms.txt
+
+
+##############################################
+# 3 SOCIAL MEDIA CRAWLERS - preview cards
+##############################################
+
+User-agent: facebookexternalhit
 Allow: /
 
 User-agent: Twitterbot
 Allow: /
 
-User-agent: facebookexternalhit
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+
+##############################################
+# 4 BLOCK AGGRESSIVE LOAD-HEAVY SCANNERS
+##############################################
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: SiteSnagger
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+
+
+##############################################
+# 5 BLOCK EMAIL HARVESTERS & SPAM BOTS
+##############################################
+
+User-agent: EmailCollector
+Disallow: /
+
+User-agent: EmailSiphon
+Disallow: /
+
+User-agent: EmailWolf
+Disallow: /
+
+User-agent: ExtractorPro
+Disallow: /
+
+User-agent: CherryPicker
+Disallow: /
+
+
+##############################################
+# 6 GLOBAL RULES FOR ALL OTHER USER AGENTS
+##############################################
+User-agent: *
+Allow: /
+
+# Allow all public content and assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.pdf$
+
+# Allow menu PDFs specifically
+Allow: /menu/
+Allow: /menu/*.pdf
+
+# Allow images folder
+Allow: /images/
+
+# Block dangerous file types
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.inc$
+Disallow: /*.conf$
+Disallow: /*.env$
+Disallow: /*.bak$
+
+# Block development/admin paths (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /backup/
+Disallow: /.git/
+Disallow: /node_modules/
+
+
+##############################################
+# 7 HONEYPOT TRAPS FOR BAD BOTS
+##############################################
+# These URLs don't exist — good bots ignore them.
+# Bad scrapers hit them → can be flagged server-side.
+Disallow: /hidden-admin/
+Disallow: /secret-login/
+Disallow: /fake-admin/
+Disallow: /dev-test/
+Disallow: /system-admin/
+
+
+##############################################
+# 8 SITEMAPS
+##############################################
+Sitemap: https://lagarda-ahlen.de/sitemap.xml
+
+
+##############################################
+# 9 AI CRAWLERS INFO
+##############################################
+# For detailed restaurant information for AI:
+# See: https://lagarda-ahlen.de/llms.txt
