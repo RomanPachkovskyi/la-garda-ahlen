@@ -1,4 +1,6 @@
-/* La Garda — Animated Logo */
+/* La Garda Ahlen — Logo Motion (SVG line-draw + fill)
+   Based on original but stroke fades out at the end
+*/
 
 .lagarda-logo {
   display: block;
@@ -12,15 +14,13 @@
   height: 100%;
 }
 
-/* Default state - fully visible (fallback if JS fails) */
+/* Default state - fully visible (fallback if animation doesn't run) */
 .lagarda-logo__path {
   --logo-color: #72abaf;
 
   fill: var(--logo-color);
-  stroke: none;
-
   fill-opacity: 1;
-  opacity: 1;
+  stroke: none;
 }
 
 /* White variant */
@@ -28,57 +28,51 @@
   --logo-color: #ffffff;
 }
 
-/* Animated state - stroke-draw effect */
-.lagarda-logo--animated .lagarda-logo__path {
-  /* Start invisible with no fill, only stroke */
+/* Initial state before animation */
+.lagarda-logo.ready-to-animate .lagarda-logo__path {
   fill-opacity: 0;
-  opacity: 0;
-  fill: var(--logo-color);
   stroke: var(--logo-color);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-dasharray: var(--dash, 1);
+  stroke-dashoffset: var(--dash, 1);
+}
 
-  /* Set up stroke-dash for drawing effect */
-  stroke-dasharray: var(--path-length);
-  stroke-dashoffset: var(--path-length);
-
-  /* Three-stage animation: fade in → draw stroke → fill */
+/* Play animation (JS adds .is-anim) */
+.lagarda-logo.is-anim .lagarda-logo__path {
   animation:
-    fadeIn 0.5s ease-out 0.2s forwards,
-    drawStroke 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards,
-    fillLogo 0.8s ease-out 2.3s forwards;
+    lagarda-draw 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    lagarda-fill 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    lagarda-hide-stroke 0.4s ease-out forwards;
+  animation-delay: 0s, 1s, 1.4s;
 }
 
-/* Keyframe animations */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes drawStroke {
+@keyframes lagarda-draw {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-@keyframes fillLogo {
+@keyframes lagarda-fill {
   to {
     fill-opacity: 1;
-    stroke-width: 0;
-    stroke: none;
   }
 }
 
-/* Reduced motion - skip animation */
+@keyframes lagarda-hide-stroke {
+  to {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+}
+
+/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .lagarda-logo__path {
-    opacity: 1 !important;
-    fill-opacity: 1 !important;
     stroke: none !important;
-    stroke-dasharray: none !important;
     stroke-dashoffset: 0 !important;
+    fill-opacity: 1 !important;
     animation: none !important;
   }
 }

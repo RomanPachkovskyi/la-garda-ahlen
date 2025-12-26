@@ -10,40 +10,34 @@ const AnimatedLogo = ({ className = '', replay = 'none' }: AnimatedLogoProps) =>
   const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log('[Logo] Component mounted');
-
-    if (!logoRef.current) {
-      console.warn('[Logo] No logoRef');
-      return;
-    }
+    if (!logoRef.current) return;
 
     const path = logoRef.current.querySelector<SVGPathElement>('.lagarda-logo__path');
-    if (!path) {
-      console.warn('[Logo] Path not found');
-      return;
-    }
+    if (!path) return;
 
-    console.log('[Logo] Path element found');
-
-    // Calculate path length for stroke animation
     try {
-      const pathLength = Math.ceil(path.getTotalLength());
-      console.log('[Logo] Path length:', pathLength);
+      // Calculate path length for stroke-dash animation
+      const len = Math.ceil(path.getTotalLength());
 
-      // Set the CSS variable for stroke-dasharray
-      path.style.setProperty('--path-length', String(pathLength));
-      console.log('[Logo] CSS variable set');
+      // Set CSS variable and inline styles (like original)
+      path.style.setProperty('--dash', String(len));
+      path.style.strokeDasharray = String(len);
+      path.style.strokeDashoffset = String(len);
 
-      // Trigger animation with a small delay to ensure CSS is ready
+      console.log('[Logo] Path length:', len, '- Animation ready');
+
+      // Add ready-to-animate class first (prepares the initial state)
+      logoRef.current.classList.add('ready-to-animate');
+
+      // Trigger animation
       requestAnimationFrame(() => {
         if (logoRef.current) {
-          logoRef.current.classList.add('lagarda-logo--animated');
-          console.log('[Logo] Animation class added');
+          logoRef.current.classList.add('is-anim');
+          console.log('[Logo] Animation started');
         }
       });
     } catch (error) {
-      // If getTotalLength fails, logo will show in default state
-      console.warn('[Logo] Animation failed:', error);
+      console.warn('[Logo] Animation setup failed:', error);
     }
   }, []);
 
