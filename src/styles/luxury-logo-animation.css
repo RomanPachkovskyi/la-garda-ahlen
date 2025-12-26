@@ -52,19 +52,19 @@
   /* Animation: draw (2.5s) → fill (1s) */
   animation:
     luxury-draw 2.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards,
-    luxury-fill 1.0s cubic-bezier(0.3, 0, 0.2, 1) 0.5s forwards;
+    luxury-fill 1.0s cubic-bezier(0.3, 0, 0.2, 1) 1.0s forwards;
 }
 
 /* 2. LINE - fade in after main text */
 .luxury-logo.animate .logo-line {
   opacity: 0;
-  animation: luxury-fade-in 0.8s ease-out 3.5s forwards;
+  animation: luxury-fade-in 0.8s ease-out 2.0s forwards;
 }
 
 /* 3. SUBTITLE: am Freibad - fade in last */
 .luxury-logo.animate .logo-subtitle {
   opacity: 0;
-  animation: luxury-fade-in 0.8s ease-out 4.0s forwards;
+  animation: luxury-fade-in 0.8s ease-out 3.0s forwards;
 }
 
 /* ========================================
