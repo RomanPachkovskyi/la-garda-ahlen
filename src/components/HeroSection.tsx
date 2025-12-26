@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { Mouse } from "lucide-react";
 import { restaurantConfig } from "@/config/restaurant";
 import LuxuryAnimatedLogo from "@/components/LuxuryAnimatedLogo";
+import { detectWebPSupport, getImageUrl } from "@/utils/webpDetection";
 
 const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [webpSupported, setWebpSupported] = useState(false);
 
   useEffect(() => {
+    // Detect WebP support
+    detectWebPSupport().then(setWebpSupported);
+
     // Trigger logo animation after a small delay
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -50,17 +55,17 @@ const HeroSection = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${restaurantConfig.heroImages[displayIndex]})`,
+          backgroundImage: `url(${getImageUrl(restaurantConfig.heroImages[displayIndex])})`,
           zIndex: 1,
         }}
-        aria-hidden="true"
+        aria-label="Restaurant hero background image"
       />
 
       {/* Transition Layer - fades in new image */}
       <div
         className="absolute inset-0 bg-cover bg-center ease-out"
         style={{
-          backgroundImage: `url(${restaurantConfig.heroImages[currentImageIndex]})`,
+          backgroundImage: `url(${getImageUrl(restaurantConfig.heroImages[currentImageIndex])})`,
           zIndex: 2,
           opacity: isTransitioning ? 1 : 0,
           transition: `opacity ${restaurantConfig.crossfadeDuration}ms ease-out`,

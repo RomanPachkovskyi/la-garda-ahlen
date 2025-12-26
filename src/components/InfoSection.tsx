@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { MapPin, Phone, Clock, Star, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { restaurantConfig } from "@/config/restaurant";
+import { getImageUrl } from "@/utils/webpDetection";
+
 const InfoSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -34,17 +36,17 @@ const InfoSection = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('${restaurantConfig.infoImages[displayIndex]}')`,
+            backgroundImage: `url('${getImageUrl(restaurantConfig.infoImages[displayIndex])}')`,
             zIndex: 1,
           }}
-          aria-hidden="true"
+          aria-label="Restaurant interior background image"
         />
 
         {/* Transition Layer - fades in new image */}
         <div
           className="absolute inset-0 bg-cover bg-center ease-out"
           style={{
-            backgroundImage: `url('${restaurantConfig.infoImages[currentImageIndex]}')`,
+            backgroundImage: `url('${getImageUrl(restaurantConfig.infoImages[currentImageIndex])}')`,
             zIndex: 2,
             opacity: isTransitioning ? 1 : 0,
             transition: `opacity ${restaurantConfig.crossfadeDuration}ms ease-out`,
