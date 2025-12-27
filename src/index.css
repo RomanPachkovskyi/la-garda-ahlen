@@ -6,6 +6,13 @@
 /* Fonts: Forum (serif headlines) + Inter (sans body) */
 
 @layer base {
+  /* TEMPORARY: Block scrolling - show only hero section */
+  html,
+  body {
+    overflow: hidden !important;
+    height: 100vh;
+  }
+
   :root {
     /* Dark premium palette */
     --background: 0 0% 5%;
